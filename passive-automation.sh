@@ -230,7 +230,7 @@ if [[ "$choice" == "yes" || "$choice" == "y" ]]; then
     fi
 
   # Ask for directory path
-  echo -e "mEnter the directory path where you want to save the file or by default it will be in /HOME/Document...if you want to save in default folder just hit enter"
+  echo -e ">Enter the directory path where you want to save the file or by default it will be in /HOME/Document...if you want to save in default folder just hit enter" | pv -qL 13
   read dir_path
   
   # Set default path if user input is empty
