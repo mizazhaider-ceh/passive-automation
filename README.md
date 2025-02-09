@@ -4,15 +4,15 @@
 
 ## 📝 Overview
 
-Passive Automation V.3.1 is a 🖥️ Bash script designed by M.izaz Haider to  automate passive 🕵️ reconnaissance efficiently. The script 📑 streamlines the process of gathering 🔍 valuable ℹ️ about a 🎯 target without actively engaging with it, ensuring that it remains within ⚖️ legal boundaries and does not 🚨 alert the Target. This script is particularly useful for 🛡️ cybersecurity professionals and 🏴‍☠️ ethical hackers.
+Passive Automation V.3.1 is a  Bash script designed by M.izaz Haider to  automate passive reconnaissance efficiently. The script  streamlines the process of gathering  valuable  about a  target without actively engaging with it, ensuring that it remains within  legal boundaries and does not  alert the Target. This script is particularly useful for 🛡️ cybersecurity professionals and 🏴‍☠️ ethical hackers.
 
 ## ⭐ Features
 
-* 🤖 Automates passive 🕵️ reconnaissance using widely used 🛠️.
-* Ensures ⚖️ legality by relying solely on passive ℹ️ gathering techniques.
-* 🚀 Speeds up 🕵️ tasks that would otherwise take ⏳.
-* 📊 Provides detailed 📄 on the availability of 🕵️ 🛠️.
-* 🎛️ Interactive prompt for 🎯 input and 🎯-based execution.
+* 🤖 Automates passive  reconnaissance using widely used 🛠️.
+* Ensures  legality by relying solely on passive  gathering techniques.
+* 🚀 Speeds up  tasks that would otherwise take ⏳.
+* 📊 Provides detailed  on the availability of  🛠️.
+* 🎛️ Interactive prompt for input and target-based execution.
 * 🎨 Uses color-coded output for better 👀 readability and 🧑‍💻 user experience.
 
 ## 🖼️ Screenshots
@@ -96,6 +96,8 @@ This 🖥️ is intended for 🎓 educational and 🏴‍☠️ ethical hacking 
 **M. Izaz Haider**
 
 GitHub: [github.com/mizazhaider-ceh](https://github.com/mizazhaider-ceh)
+Linkedin:
+[https://www.linkedin.com/in/muhammad-izaz-haider-091639314]
 
 ## 📜 License
 
