@@ -99,4 +99,4 @@ GitHub: [github.com/mizazhaider-ceh](https://github.com/mizazhaider-ceh)
 
 ## 📜 License
 
-This 📂 is licensed under the 🏛️ MIT License - see the [LICENSE](LICENSE.txt) 📄 for details.
+This 📂 is licensed under the 🏛️ MIT License - see the [LICENSE](LICENSE) 📄 for details.
