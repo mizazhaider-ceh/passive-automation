@@ -4,11 +4,11 @@
 
 ## 📝 Overview
 
-Passive Automation V.3.1 is a  Bash script designed by M.izaz Haider to  automate passive reconnaissance efficiently. The script  streamlines the process of gathering  valuable  about a  target without actively engaging with it, ensuring that it remains within  legal boundaries and does not  alert the Target. This script is particularly useful for 🛡️ cybersecurity professionals and 🏴‍☠️ ethical hackers.
+Passive Automation V.3.1 is a  Bash script designed by M.izaz Haider to  automate passive reconnaissance efficiently. The script  streamlines the process of gathering  valuable information ✨️ about a  target without actively engaging with it, ensuring that it remains within  legal boundaries and does not  alert the Target. This script is particularly useful for 🛡️ cybersecurity professionals and 🏴‍☠️ ethical hackers.
 
 ## ⭐ Features
 
-* 🤖 Automates passive  reconnaissance using widely used 🛠️.
+* 🤖 Automates passive  reconnaissance using widely used Tools.
 * Ensures  legality by relying solely on passive  gathering techniques.
 * 🚀 Speeds up  tasks that would otherwise take ⏳.
 * 📊 Provides detailed  on the availability of  🛠️.
