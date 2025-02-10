@@ -124,7 +124,7 @@ echo -e "${Red}A hacker’s greatest weapon isn’t code, it’s patience. ⏳${
 
 echo -e "${WHITE}That's All ....Now Lets Move on Next....${NC}" | pv -qL 28
 
-echo "Please enter the target website address (e.g., example.com, not http://example.com):"
+echo "Please enter the target website address (e.g., example.com, not http://example.com):" | pv -qL 40
 
 # Prompting user for the target website
 echo -e "${RED}Enter Your target Web Address below${NC}" | pv -qL 20
