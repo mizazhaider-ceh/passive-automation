@@ -190,6 +190,10 @@ if host "$target" &>/dev/null; then
             echo -e "${YELLOW}✅ WAFW00F Result:\n${NC}$wafw00f_result" | pv -qL 100
             echo -e "\e[34m========================================\e[0m\n"
 
+            echo -e "🔹 Running sublist3r on $target..." | pv -qL 15
+            sublist3r_result=$(sublist3r -d  $target) # Enumerate subdomains passively using Amass
+            echo -e "${RED}✅ sublist3r Results:\n${NC}$sublist3r_result" | pv -qL 85
+
             echo -e "🔹 Running amass on $target..." | pv -qL 15
             amass_result=$(amass enum -passive -d  $target) # Enumerate subdomains passively using Amass
             echo -e "${CYAN}✅ Amass Results:\n${NC}$amass_result" | pv -qL 85
