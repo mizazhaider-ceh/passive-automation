@@ -1,5 +1,5 @@
 #                        ⚡ Passive Automation V.3.1 ⚡
-#
+
 ![Passive Automation V.3.1](screenshot/logo.png)
 
 ## 📝 Overview
@@ -86,6 +86,18 @@ sudo apt update && sudo apt install -y dnsutils whois whatweb dnsrecon theharves
    ./passive-automation.sh
    ```
 5. ⌨️ Enter the 🎯 domain when prompted and follow the 📺 on-screen instructions.
+
+> 💡 Tools that are not installed are detected up front and skipped with a
+> clear message instead of failing mid-run.
+
+## 🧪 Run the Self-Tests
+
+No network or root needed. Syntax-checks the script and runs the full flow
+with stubbed recon tools:
+
+```bash
+bash tests/syntax_check.sh
+```
 
 ## ⚖️ Legal Disclaimer
 

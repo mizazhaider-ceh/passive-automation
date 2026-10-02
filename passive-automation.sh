@@ -39,6 +39,8 @@ echo -e "\e[33m A hacker’s first step is not to break, but to understand. 🧠
 # Create a temporary file with a unique name
 # The file will be stored in the default system temp directory (usually /tmp/)
 temp_file=$(mktemp)
+# Clean up the temp file on any exit (Ctrl+C included)
+trap '[ -n "${temp_file:-}" ] && rm -f "$temp_file"' EXIT
 
 # Run the script and store output
 {
@@ -60,67 +62,87 @@ echo -e  "${WHITE}Testing availability of passive data collection tools...${NC}"
 
 if ! command -v host &>/dev/null; then # Check if the 'host' command is available
   echo -e "${RED}> Host tool is not installed${NC}"
+  HAVE_host=0
   else
   echo -e  ">${RED}✅host is.......................installed ${NC}" | pv -qL 28
+  HAVE_host=1
 fi
 
 if ! command -v whatweb &>/dev/null; then # Check if the 'whatweb' command is available
   echo -e "${RED}> whatweb tool is not installed${NC}"
+  HAVE_whatweb=0
   else
   echo -e ">✅whatweb is....................installed" | pv -qL 28
+  HAVE_whatweb=1
 fi
 
 if ! command -v dnsrecon  &>/dev/null; then # Check if the 'dnsrecon' command is available
   echo -e "${RED}> dnsrecon tool is not installed${NC}"
+  HAVE_dnsrecon=0
     else
   echo -e ">${CYAN}✅dnsrecon is...................installed${NC}" | pv -qL 28
+  HAVE_dnsrecon=1
 fi
 
 
 if ! command -v dig  &>/dev/null; then # Check if the 'dig' command is available
   echo -e "${RED}> dig tool is not installed${NC}"
+  HAVE_dig=0
   else
   echo -e ">${YELLOW}✅dig is........................installed${NC}" | pv -qL 28
+  HAVE_dig=1
 fi
 
 if ! command -v nslookup &>/dev/null; then # Check if the 'nslookup' command is available
   echo -e "${RED}> nslookup tool is not installed${NC}"
+  HAVE_nslookup=0
   else
   echo -e ">${RED}✅nslookup is...................installed${NC}" | pv -qL 28
+  HAVE_nslookup=1
 fi
 
 if ! command -v whois &>/dev/null; then # Check if the 'whois' command is available
   echo -e "${RED}> whois tool is not installed${NC}"
+  HAVE_whois=0
   else
   echo -e ">✅whois is......................installed" | pv -qL 28
+  HAVE_whois=1
 fi
 
 if ! command -v theHarvester &>/dev/null; then # Check if the 'theHarvester' command is available
   echo -e "${RED}> theHarvester tool is not installed${NC}"
+  HAVE_theHarvester=0
   else
   echo -e ">${CYAN}✅theHarvester is...............installed${NC}" | pv -qL 28
+  HAVE_theHarvester=1
 fi
 
 if ! command -v wafw00f  &>/dev/null; then # Check if the 'wafw00f' command is available
   echo -e "${RED}> wafw00f tool is not installed${NC}"
+  HAVE_wafw00f=0
   else
   echo -e ">${MAGENTA}✅wafw00f is....................installed${NC}" | pv -qL 28
+  HAVE_wafw00f=1
 fi
 
 if ! command -v sublist3r  &>/dev/null; then # Check if the 'sublist3r' command is available
   echo -e "${RED}> sublist3r tool is not installed${NC}"
+  HAVE_sublist3r=0
   else
   echo -e ">${YELLOW}✅sublist3r  is.................installed${NC}" | pv -qL 28
+  HAVE_sublist3r=1
 fi
 
 if ! command -v amass  &>/dev/null; then # Check if the 'amass' command is available
   echo -e "${RED}> amass tool is not installed${NC}"
+  HAVE_amass=0
   else
   echo -e ">${RED}✅amass  is.....................installed${NC}" | pv -qL 28
+  HAVE_amass=1
 fi
 echo -e "\e[34m========================================\e[0m" # Prints a blue-colored separator line for better readability
 
-echo -e "${Red}A hacker’s greatest weapon isn’t code, it’s patience. ⏳${NC}" | pv -qL 28
+echo -e "${RED}A hacker’s greatest weapon isn’t code, it’s patience. ⏳${NC}" | pv -qL 28
 
 echo -e "${WHITE}That's All ....Now Lets Move on Next....${NC}" | pv -qL 28
 
@@ -145,58 +167,98 @@ if host "$target" &>/dev/null; then
 
         # If user chooses 'Y' or 'y', start passive reconnaissance
         if [[ "$choice" == "Y" || "$choice" == "y" ]]; then
-            echo -e "${White}Remember that : Patience and persistence turn a good hacker into a great one💡${NC}" | pv -qL 24
+            echo -e "${WHITE}Remember that : Patience and persistence turn a good hacker into a great one💡${NC}" | pv -qL 24
             echo -e "${RED}Ok...Then wait with patience... Script will take time...${NC}" | pv -qL 20
             echo -e "\n-------------------------"
             
             # Running various passive reconnaissance tools one by one
+            if [ "${HAVE_host:-0}" = "1" ]; then
             echo -e "🔍 Checking with Host..." | pv -qL 15
-            host_result=$(host $target) # Perform a DNS lookup on the target and store the result in 'host_result'
+            host_result=$(host "$target") # Perform a DNS lookup on the target and store the result in 'host_result'
             echo -e "${WHITE}✅ Host Result:\n${NC}$host_result" | pv -qL 85
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping Host: not installed${NC}"
+            fi
 
+            if [ "${HAVE_whatweb:-0}" = "1" ]; then
             echo -e "\n🔍 Checking with WhatWeb..." | pv -qL 15
-            whatweb_result=$(whatweb $target) # Scan the target with WhatWeb to identify technologies and store the result
+            whatweb_result=$(whatweb "$target") # Scan the target with WhatWeb to identify technologies and store the result
             echo -e "${RED}✅ WhatWeb Result:\n${NC}$whatweb_result" | pv -qL 85
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping WhatWeb: not installed${NC}"
+            fi
 
+            if [ "${HAVE_dnsrecon:-0}" = "1" ]; then
             echo -e "\n🔍 Checking with DNSRecon..." | pv -qL 15
-            dnsrecon_result=$(dnsrecon -d $target) # Perform DNS reconnaissance using dnsrecon
+            dnsrecon_result=$(dnsrecon -d "$target") # Perform DNS reconnaissance using dnsrecon
             echo -e "${YELLOW}✅ DNSRecon Result:\n${NC}$dnsrecon_result" | pv -qL 85
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping DNSRecon: not installed${NC}"
+            fi
 
+            if [ "${HAVE_dig:-0}" = "1" ]; then
             echo -e "\n🔍 Checking with Dig..." | pv -qL 15
-            dig_result=$(dig $target) # Query domain information using dig
+            dig_result=$(dig "$target") # Query domain information using dig
             echo -e "${CYAN}✅ Dig Result:\n${NC}$dig_result" | pv -qL 85
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping Dig: not installed${NC}"
+            fi
 
+            if [ "${HAVE_nslookup:-0}" = "1" ]; then
             echo -e "\n🔍 Checking with NSLookup..." | pv -qL 15
-            nslookup_result=$(nslookup $target) # Perform DNS lookup using nslookup
+            nslookup_result=$(nslookup "$target") # Perform DNS lookup using nslookup
             echo -e "${WHITE}✅ NSLookup Result:\n${NC}$nslookup_result" | pv -qL 85
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping NSLookup: not installed${NC}"
+            fi
 
+            if [ "${HAVE_whois:-0}" = "1" ]; then
             echo -e "\n🔍 Checking with WHOIS..." | pv -qL 15
-            whois_result=$(whois $target) # Retrieve WHOIS information for the target domain
+            whois_result=$(whois "$target") # Retrieve WHOIS information for the target domain
             echo -e "${RED}✅ WHOIS Result:\n${NC}$whois_result" | pv -qL 85
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping WHOIS: not installed${NC}"
+            fi
 
+            if [ "${HAVE_theHarvester:-0}" = "1" ]; then
             echo -e "\n🔍 Checking with TheHarvester..." | pv -qL 15
-            theHarvester_result=$(theHarvester -d $target) # Gather subdomains and emails using theHarvester
+            theHarvester_result=$(theHarvester -d "$target") # Gather subdomains and emails using theHarvester
             echo -e "${BLUE}✅ TheHarvester Result:\n${NC}$theHarvester_result" | pv -qL 100
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping TheHarvester: not installed${NC}"
+            fi
 
+            if [ "${HAVE_wafw00f:-0}" = "1" ]; then
             echo -e "\n🔍 Checking with WAFW00F..." | pv -qL 15
-            wafw00f_result=$(wafw00f $target) # Detect the presence of a Web Application Firewall (WAF) using Wafw00f
+            wafw00f_result=$(wafw00f "$target") # Detect the presence of a Web Application Firewall (WAF) using Wafw00f
             echo -e "${YELLOW}✅ WAFW00F Result:\n${NC}$wafw00f_result" | pv -qL 100
             echo -e "\e[34m========================================\e[0m\n"
+            else
+                echo -e "${YELLOW}Skipping WAFW00F: not installed${NC}"
+            fi
 
+            if [ "${HAVE_sublist3r:-0}" = "1" ]; then
             echo -e "🔹 Running sublist3r on $target..." | pv -qL 15
-            sublist3r_result=$(sublist3r -d  $target) # Enumerate subdomains passively using Amass
+            sublist3r_result=$(sublist3r -d "$target") # Enumerate subdomains passively using Amass
             echo -e "${RED}✅ sublist3r Results:\n${NC}$sublist3r_result" | pv -qL 85
+            else
+                echo -e "${YELLOW}Skipping sublist3r: not installed${NC}"
+            fi
 
+            if [ "${HAVE_amass:-0}" = "1" ]; then
             echo -e "🔹 Running amass on $target..." | pv -qL 15
-            amass_result=$(amass enum -passive -d  $target) # Enumerate subdomains passively using Amass
+            amass_result=$(amass enum -passive -d "$target") # Enumerate subdomains passively using Amass
             echo -e "${CYAN}✅ Amass Results:\n${NC}$amass_result" | pv -qL 85
+            else
+                echo -e "${YELLOW}Skipping Amass: not installed${NC}"
+            fi
 
 
             echo -e "\n-------------------------" 
@@ -215,9 +277,9 @@ echo -e "\e[33m Information without storage is like a weapon without a wielder. 
 
 #asking user wheter to save or not
 echo -e "\e[97m Save it now, or regret it later. Your choice. (yes/no) ⏳🖥️ \e[0m" | pv -qL 15 
-read choice
+read save_choice
 
-if [[ "$choice" == "yes" || "$choice" == "y" ]]; then
+if [[ "$save_choice" == "yes" || "$save_choice" == "y" ]]; then
     echo -e "\n\e[33mChoose file format: markdown (md), text (txt), or log\e[0m" #Providing Three formats to store the result 
     read format
     echo -e "\e[97mPlease enter the name of file below (e.g result,report,etc) \e[0m"
